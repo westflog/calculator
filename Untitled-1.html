@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .con {
+            border: 1px solid #000000;
+            width: 500px;
+            height: 600px;
+            text-align: center;
+            position: relative;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+ 
+        .con>div {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #000000;
+            box-shadow: 2px 2px 2px #CCCCCC;
+            float: left;
+            margin: 11px;
+            text-align: center;
+            font-size: 40px;
+            line-height: 100px;
+            user-select: none;
+        }
+ 
+        .con>input {
+            width: 90%;
+            height: 30px;
+            line-height: 30px;
+            font-size: 25px;
+            text-align: right;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            box-shadow: 3px 3px 3px #CCCCCC;
+            outline: none;
+            padding: 5px 10px;
+            background-color: white;
+            border: 1px solid #000000;
+        }
+ 
+        .clear::after {
+            content: "";
+            clear: both;
+            display: block;
+            height: 0;
+            visibility: hidden;
+            overflow: hidden;
+        }
+ 
+        .clear {
+            zoom: 1;
+        }
+    </style>
+</head>
+ 
+<body>
+    <div class="con clear">
+        <input type="text" id="input" value="0" disabled>
+        <div class="divs" id="div1">7</div>
+        <div class="divs" id="div2">8</div>
+        <div class="divs" id="div3">9</div>
+        <div class="divs" id="div4">-</div>
+        <div class="divs" id="div5">4</div>
+        <div class="divs" id="div6">5</div>
+        <div class="divs" id="div7">6</div>
+        <div class="divs" id="div8">+</div>
+        <div class="divs" id="div9">1</div>
+        <div class="divs" id="div10">2</div>
+        <div class="divs" id="div11">3</div>
+        <div class="divs" id="div12">*</div>
+        <div class="divs" id="div13">C</div>
+        <div class="divs" id="div14">0</div>
+        <div class="divs" id="div15">=</div>
+        <div class="divs" id="div16">/</div>
+    </div>
+ 
+ 
+    <script>
+        
+ 
+        var input=document.getElementById("input");
+        var current="",first="",type="";
+ 
+        for(var i=1;i<17;i++){
+            var div=document.getElementById("div"+i);
+            div.onclick=function(){
+                if(isNaN(this.innerHTML)){
+                    switch(this.innerHTML){
+                        case "+":
+                        type="+";
+                        first=current;
+                        current="";
+                        break;
+                        case "-":
+                        type="-";
+                        first=current;
+                        current="";
+                        break;
+                        case "*":
+                        type="*";
+                        first=current;
+                        current="";
+                        break;
+                        case "/":
+                        type="/";
+                        first=current;
+                        current="";
+                        break;
+                        case "=":
+                        if(type==="+") input.value=Number(first)+Number(current);
+                        if(type==="-") input.value=first-current;
+                        if(type==="*") input.value=first*current;
+                        if(type==="/") input.value=first/current;
+                        first="";
+                        current="";
+                        type="";
+                        break;
+                        
+                        input.value="0";
+                        break;
+                    }
+                }else{
+                    current+=this.innerHTML;
+                    input.value=Number(current)+"";
+                }
+            }
+        }
+        
+    </script>
+</body>
+ 
+</html>
